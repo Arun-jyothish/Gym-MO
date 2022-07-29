@@ -16,7 +16,7 @@ double x, y, z;
 void setup() {
   SerialBT.begin("ESP32test");   /// bt code
   delay(1000);
-
+  pinMode(LED_BUILTIN,OUTPUT);
   Wire.begin();
   Wire.beginTransmission(MPU_addr);
   Wire.write(0x6B);
@@ -46,7 +46,7 @@ void loop()
     y = RAD_TO_DEG * (atan2(-xAng, -zAng) + PI);
     z = RAD_TO_DEG * (atan2(-yAng, -xAng) + PI);
 
-    x=z;
+
 
     /*
       Serial.print("Angle Z: "); Serial.println(z);
@@ -59,14 +59,19 @@ void loop()
     int highier_angle = 65 ;
     Serial.println(x);
     if ( x > highier_angle && x < 120) {
-      SerialBT.println("Wrong, Too high");
+      SerialBT.println("Wrong, Too low");
+      Serial.println("Wrong, Too low");
+
     }
     else if ( x < lower_angle && x > 120) {
-      SerialBT.println("Wrong, Too low");
+      SerialBT.println("Wrong, Too high");
+      Serial.println("Wrong, Too high");
+
     }
 
     else {
       SerialBT.println(" perfect ");
+      Serial.println(" perfect ");
     }
   }
   else
