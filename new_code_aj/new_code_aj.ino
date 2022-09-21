@@ -54,15 +54,23 @@ void main_fn(String msg)
     lower_angle = 290;
     highier_angle = 65 ;
 		Serial.println("LEG exercise Selected !");
+		SerialBT.println("LEG exercise Selected !");
 	}
 	else if (msg == "arm" || msg == "ARM"){
     lower_angle = 290;
     highier_angle = 65 ;
 		Serial.println("ARM exercise Selected !");
+		SerialBT.println("ARM exercise Selected !");
 	}
 	else {
 		Serial.println("Command Not Found !");
+		return;
 	}
+		SerialBT.print("lower angle: ");
+		SerialBT.println(lower_angle);
+		SerialBT.print("upper angle: ");
+		SerialBT.println(highier_angle);
+
 		int x,y,z;
 		init_fn(x,y,z);
 
@@ -87,9 +95,9 @@ void main_fn(String msg)
 
 
 void loop(){
-	string msg;
+	String msg;
 
-  if ( SerialBT.available()) {
+   SerialBT.available()) {
     digitalWrite(LED_BUILTIN, LOW);   // BT CONNECTED INDICATION
 		msg = SerialBT.readString();
 		msg.trim();
