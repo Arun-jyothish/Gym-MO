@@ -64,7 +64,7 @@ void main_fn(String msg)
 		Serial.println("Command Not Found !");
 	}
 		int x,y,z;
-		out = init_fn(x,y,z);
+		init_fn(x,y,z);
 
     Serial.println(x);
     if ( x > highier_angle && x < 120) {
@@ -87,13 +87,14 @@ void main_fn(String msg)
 
 
 void loop(){
+	string msg;
 
   if ( SerialBT.available()) {
     digitalWrite(LED_BUILTIN, LOW);   // BT CONNECTED INDICATION
-		String msg = SerialBT.readString();
+		msg = SerialBT.readString();
 		msg.trim();
-	main_fn(msg);
   }
+  main_fn(msg);
   else
     digitalWrite(LED_BUILTIN, HIGH);
 }
