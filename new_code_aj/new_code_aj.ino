@@ -97,12 +97,12 @@ void main_fn(String msg)
 void loop(){
 	String msg;
 
-   SerialBT.available()) {
+   if (SerialBT.available()) {
     digitalWrite(LED_BUILTIN, LOW);   // BT CONNECTED INDICATION
 		msg = SerialBT.readString();
 		msg.trim();
   }
-  main_fn(msg);
   else
     digitalWrite(LED_BUILTIN, HIGH);
+  main_fn(msg);
 }

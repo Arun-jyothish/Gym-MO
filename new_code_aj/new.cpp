@@ -1,24 +1,30 @@
-/* #include <iostream> */
-/* #include <cctype> */
-/* #include <string> */
+#include <iostream>
+#include <string>
 using namespace std; 	
 
 enum msgD{
 	LEG,
-	ARM };
+	ARM,
+	Null};
 
 msgD strTomsgD(string str){
 	/* tolower(str); */
 	if (str == "leg" ) return LEG;
-	if (str == "arm" ) return ARM;
+	else if (str == "arm" ) return ARM;
+	return Null;
 }
-
-string msg;
-switch (strTomsgD(msg)){
-	case LEG: 
-		break;
-	case ARM:
-		break;
-	default:
-		Serial.println("Command Not Found !");
+int main(int argc, char *argv[])
+{
+	string msg;
+	msgD dat;
+	cin>>msg;
+	dat = strTomsgD(msg);	
+	if(dat == LEG){
+		cout<<"legf";
+	}
+	if(dat == ARM){
+		cout<<"armp";
+	}
+	
+	return 0;
 }
