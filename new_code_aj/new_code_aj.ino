@@ -25,11 +25,7 @@ void setup() {
   Wire.endTransmission(true);
   Serial.begin(9600);
 }
-void loop()
-
-{
-  if ( SerialBT.available()) {
-    digitalWrite(LED_BUILTIN, LOW);   // BT CONNECTED INDICATION
+void init_fn(int& x,int& y,int& z){
 
     Wire.beginTransmission(MPU_addr);
     Wire.write(0x3B);
@@ -46,33 +42,54 @@ void loop()
     y = RAD_TO_DEG * (atan2(-xAng, -zAng) + PI);
     z = RAD_TO_DEG * (atan2(-yAng, -xAng) + PI);
 
+}
+void main_fn(String msg)
 
-
-    /*
-      Serial.print("Angle Z: "); Serial.println(z);
-      Serial.print("Angle X: "); Serial.println(x);
-      Serial.print("Angle Y: "); Serial.println(y);
-      Serial.println("<=========================================================>");
-    */
-
+{
     int lower_angle = 290;
     int highier_angle = 65 ;
+
+	switch (msg){
+		case "leg":
+			lower_angle = leg_lower;
+			highier_angle = leg_highier;
+			break;
+		case "arm":
+			lower_angle = arm_lower;
+			highier_angle = arm_highier;
+			break;
+		default:
+			SerialBT.println("Unknown Command");
+	}
+		init_fn(x,y,z);
+
     Serial.println(x);
     if ( x > highier_angle && x < 120) {
       SerialBT.println("Wrong, Too low");
-      Serial.println("Wrong, Too low");
+      /* Serial.println("Wrong, Too low"); */
 
     }
     else if ( x < lower_angle && x > 120) {
       SerialBT.println("Wrong, Too high");
-      Serial.println("Wrong, Too high");
+      /* Serial.println("Wrong, Too high"); */
 
     }
 
     else {
       SerialBT.println(" perfect ");
-      Serial.println(" perfect ");
+      /* Serial.println(" perfect "); */
     }
+	Serial.println(x);
+  }
+
+
+void loop(){
+
+  if ( SerialBT.available()) {
+    digitalWrite(LED_BUILTIN, LOW);   // BT CONNECTED INDICATION
+		String msg = SerialBT.readString();
+		msg.trim();
+	main_fn(msg);
   }
   else
     digitalWrite(LED_BUILTIN, HIGH);
