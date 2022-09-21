@@ -9,7 +9,8 @@ int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ;
 int minVal = 265;
 int maxVal = 402;
 
-double x, y, z;
+/* double x, y, z; */
+
 //#define led  LED_BUILTIN
 
 void setup() {
@@ -48,12 +49,17 @@ void main_fn(String msg)
 	if (msg == "leg" || msg == "LEG"){
     int lower_angle = 290;
     int highier_angle = 65 ;
+		Serial.println("LEG exercise Selected !");
 	}
-	if (msg == "arm" || msg == "ARM"){
+	else if (msg == "arm" || msg == "ARM"){
     int lower_angle = 290;
     int highier_angle = 65 ;
+		Serial.println("ARM exercise Selected !");
 	}
-
+	else {
+		Serial.println("Command Not Found !");
+	}
+		int x,y,z;
 		init_fn(x,y,z);
 
     Serial.println(x);
