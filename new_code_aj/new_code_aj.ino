@@ -3,7 +3,6 @@
 #include "BluetoothSerial.h"
 
 BluetoothSerial SerialBT;
-
 const int MPU_addr = 0x68;
 int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ;
 
@@ -46,21 +45,15 @@ void init_fn(int& x,int& y,int& z){
 void main_fn(String msg)
 
 {
+	if (msg == "leg" || msg == "LEG"){
     int lower_angle = 290;
     int highier_angle = 65 ;
-
-	switch (msg){
-		case "leg":
-			lower_angle = leg_lower;
-			highier_angle = leg_highier;
-			break;
-		case "arm":
-			lower_angle = arm_lower;
-			highier_angle = arm_highier;
-			break;
-		default:
-			SerialBT.println("Unknown Command");
 	}
+	if (msg == "arm" || msg == "ARM"){
+    int lower_angle = 290;
+    int highier_angle = 65 ;
+	}
+
 		init_fn(x,y,z);
 
     Serial.println(x);
