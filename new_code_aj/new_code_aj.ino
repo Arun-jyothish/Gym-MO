@@ -67,12 +67,12 @@ void main_fn(String msg)
 		out = init_fn(x,y,z);
 
     Serial.println(x);
-    if ( x > out.highier_angle && x < 120) {
+    if ( x > highier_angle && x < 120) {
       SerialBT.println("Wrong, Too low");
       /* Serial.println("Wrong, Too low"); */
 
     }
-    else if ( x < out.lower_angle && x > 120) {
+    else if ( x < lower_angle && x > 120) {
       SerialBT.println("Wrong, Too high");
       /* Serial.println("Wrong, Too high"); */
 
