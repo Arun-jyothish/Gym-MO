@@ -41,34 +41,38 @@ void init_fn(int& x,int& y,int& z){
     x = RAD_TO_DEG * (atan2(-yAng, -zAng) + PI);
     y = RAD_TO_DEG * (atan2(-xAng, -zAng) + PI);
     z = RAD_TO_DEG * (atan2(-yAng, -xAng) + PI);
+	
 
 }
 void main_fn(String msg)
 
 {
-	if (msg == "leg" || msg == "LEG"){
     int lower_angle = 290;
     int highier_angle = 65 ;
+
+	if (msg == "leg" || msg == "LEG"){
+    lower_angle = 290;
+    highier_angle = 65 ;
 		Serial.println("LEG exercise Selected !");
 	}
 	else if (msg == "arm" || msg == "ARM"){
-    int lower_angle = 290;
-    int highier_angle = 65 ;
+    lower_angle = 290;
+    highier_angle = 65 ;
 		Serial.println("ARM exercise Selected !");
 	}
 	else {
 		Serial.println("Command Not Found !");
 	}
 		int x,y,z;
-		init_fn(x,y,z);
+		out = init_fn(x,y,z);
 
     Serial.println(x);
-    if ( x > highier_angle && x < 120) {
+    if ( x > out.highier_angle && x < 120) {
       SerialBT.println("Wrong, Too low");
       /* Serial.println("Wrong, Too low"); */
 
     }
-    else if ( x < lower_angle && x > 120) {
+    else if ( x < out.lower_angle && x > 120) {
       SerialBT.println("Wrong, Too high");
       /* Serial.println("Wrong, Too high"); */
 
